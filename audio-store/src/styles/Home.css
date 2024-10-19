@@ -1,0 +1,146 @@
+.home {
+  text-align: center;
+  padding: 0;
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: slide 10s infinite;
+}
+
+.carousel-item {
+  flex: 1;
+  min-width: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: opacity 1s ease-in-out;
+}
+
+.hero .carousel .slide {
+  background: none;
+  height: 100%; /* Ensure the carousel slide takes full height */
+}
+
+.hero img {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the image covers the entire area */
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
+.hero span {
+letter-spacing: 2px;
+animation: textGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+from {
+  text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #00e, 0 0 30px #00e, 0 0 40px #00e, 0 0 55px #00e, 0 0 75px #00e;
+}
+to {
+  text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #00e, 0 0 60px #00e, 0 0 70px #00e, 0 0 80px #00e, 0 0 100px #00e;
+}
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+}
+
+.categories {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.category {
+  width: 30%;
+  background: #f4f4f4;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0; /* Add some margin for spacing */
+  text-align: center;
+}
+
+.category img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.category h2 {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+.category p {
+  font-size: 1rem;
+  color: #555;
+}
+
+.view-more {
+  margin: 1rem;
+}
+
+.view-more-button {
+  background-color: #050505;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.view-more-button:hover {
+  background-color: #fcfbfb;
+  color: #050505;
+  border: #050505 solid 2px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .hero {
+    height: 55vh;
+  }
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 0.875rem;
+  }
+
+  .category {
+    width: 90%;
+    margin: 1rem auto;
+  }
+}

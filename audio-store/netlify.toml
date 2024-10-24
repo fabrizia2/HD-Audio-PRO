@@ -1,6 +1,6 @@
 [build]
   base = "audio-store"
-  publish = "audio-store/build"
+  publish = "build"
   command = "npm run build"
 
 [context.production.environment]

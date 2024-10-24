@@ -32,10 +32,6 @@ footer {
   }
 }
   
-  footer:hover {
-    background-color: #444; /* Darker background on hover */
-  }
-  
   .footer-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -94,7 +90,8 @@ footer {
   
   @media (max-width: 768px) {
     .footer{
-        overflow-x: hidden;
+      overflow: hidden;
+      overflow-x: hidden;
     }
   
     .footer-nav li {

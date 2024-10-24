@@ -89,4 +89,8 @@
   .product-grid {
     grid-template-columns: repeat(1, 1fr); /* 1 column for small screens */
   }
+
+  .add-to-cart-button {
+    margin-bottom: 10px;
+  }
 }

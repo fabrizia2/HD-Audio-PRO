@@ -1,25 +1,20 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 
-// Create CartContext
+// Create a Context for the cart
 const CartContext = createContext();
 
-// Create a provider component
+export const useCart = () => useContext(CartContext);
+
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([]);
 
-  const addToCart = (product) => {
-    console.log('Adding to cart:', product); // Debug log to check if the product is correct
-    setCart((prevCart) => [...prevCart, product]);
-  };
+    const addToCart = (product) => {
+        setCart([...cart, product]);
+    };
 
-  return (
-    <CartContext.Provider value={{ cart, addToCart }}>
-      {children}
-    </CartContext.Provider>
-  );
-};
-
-// Custom hook to use the CartContext
-export const useCart = () => {
-  return useContext(CartContext);
+    return (
+        <CartContext.Provider value={{ cart, addToCart }}>
+            {children}
+        </CartContext.Provider>
+    );
 };

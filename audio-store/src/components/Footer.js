@@ -13,23 +13,25 @@ const Footer = () => {
         <ul className="footer-nav">
           <li><a href="/">Home</a></li>
           <li><a href="/products">Products</a></li>
+          <li><a href="/cart">Cart</a></li>
           <li><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
+          <li><a href="/login">Login</a></li>
         </ul>
         <div className="social-media">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+          <a href="/" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faFacebook} />
           </a>
-          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+          <a href="/" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faTwitter} />
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.instagram.com/hdaudio_pro?igsh=MTk1bmlxMTd5aGh4dg==" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faInstagram} />
           </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+          <a href="/" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faLinkedin} />
           </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+          <a href="/" target="_blank" rel="noopener noreferrer">
             <FontAwesomeIcon icon={faYoutube} />
           </a>
         </div>

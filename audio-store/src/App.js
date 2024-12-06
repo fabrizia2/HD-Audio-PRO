@@ -10,6 +10,8 @@ import Products from './pages/Products';
 import ProductList from './pages/ProductList';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 import { CartProvider } from './context/CartContext';
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
             <Route path="/products/:category" element={<ProductList />} />
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/login" element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
           </Routes>
         </main>
         <Footer />

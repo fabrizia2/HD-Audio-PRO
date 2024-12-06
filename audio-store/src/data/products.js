@@ -1,6 +1,6 @@
 // src/data/products.js
 
-import img from '../assets/images/Designer.jpeg'; // Importing a single image as an example
+import img from '../assets/images/amp2.jpg'; // Importing a single image as an example
 
 const products = [
   {

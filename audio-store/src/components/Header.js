@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import './Header.css';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false); // State to manage hamburger menu
   const [isTransparent, setIsTransparent] = useState(false);
+  const [cart] = useState([]); // State for cart items
 
   const toggleMenu = () => {
     setIsOpen(!isOpen); // Toggle the menu open/close state
@@ -35,11 +39,17 @@ const Header = () => {
       </div>
       <nav>
         <ul className={isOpen ? 'active' : ''}>
-          <li><a href="/">Home</a></li>
-          <li><a href="/products">Products</a></li>
-          <li><a href="/cart">Cart</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/products">Products</Link></li>
+          <li>
+            <Link to="/cart">
+              <FontAwesomeIcon icon={faShoppingCart} />
+              {cart.length > 0 && <span className="cart-count">{cart.length}</span>} Cart
+            </Link>
+          </li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/login">Login</Link></li>
         </ul>
       </nav>
     </header>

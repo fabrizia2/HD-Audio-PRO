@@ -1,57 +1,35 @@
-// src/pages/Products.js
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Breadcrumb from '../components/Breadcrumb';
 import '../styles/Products.css';
-
-const categories = [
-  {
-    id: 1,
-    name: 'Speakers',
-    description: 'High-quality speakers for all your audio needs.',
-    image: require('../assets/images/speaker2.jpg'), // Ensure correct path
-    path: 'speakers',
-  },
-  {
-    id: 2,
-    name: 'Amplifiers',
-    description: 'Powerful amplifiers for professional sound.',
-    image: require('../assets/images/amp2.jpg'), // Ensure correct path
-    path: 'amplifiers',
-  },
-  {
-    id: 3,
-    name: 'Microphones',
-    description: 'Wide range of microphones for various applications.',
-    image: require('../assets/images/mic1.jpg'), // Ensure correct path
-    path: 'microphones',
-  },
-  {
-    id: 4,
-    name: 'Microphone Racks',
-    description: 'Durable racks to keep your microphones organized.',
-    image: require('../assets/images/Designer (1).jpeg'), // Ensure correct path
-    path: 'microphone-racks',
-  },
-  {
-    id: 5,
-    name: 'Microphone Cases',
-    description: 'Protective cases for safe transportation.',
-    image: require('../assets/images/Designer.jpeg'), // Ensure correct path
-    path: 'microphone-cases',
-  },
-  {
-    id: 6,
-    name: 'Power Distributors',
-    description: 'Reliable power distributors for consistent performance.',
-    image: require('../assets/images/distributor1.jpg'), // Ensure correct path
-    path: 'power-distributors',
-  },
-];
+import config from '../config/config'; // Ensure you have the correct import for the config
 
 function Products() {
+  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Fetch categories from the API
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(`${config.API_BASE_URL}/categories/`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch categories');
+        }
+        const data = await response.json();
+        
+        // Log the full data to inspect its structure
+        console.log('Fetched categories:', data);
+
+        // Assuming data has a 'data' property containing the list of categories
+        setCategories(data.data); // Accessing the 'data' property that contains categories
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleCategoryClick = (path) => {
     navigate(`/products/${path}`);
@@ -61,24 +39,28 @@ function Products() {
     <div className="products-container">
       <Breadcrumb />
       <div className="category-grid">
-        {categories.map((category) => (
-          <div 
-            key={category.id} 
-            className="category-card" 
-            onClick={() => handleCategoryClick(category.path)}
-            role="button" // Add role for accessibility
-            tabIndex={0} // Make it focusable for keyboard navigation
-            onKeyPress={(e) => e.key === 'Enter' && handleCategoryClick(category.path)} // Handle keyboard navigation
-          >
-            <img 
-              src={category.image} 
-              alt={`${category.name} - ${category.description}`} // More descriptive alt text
-              className="category-image" 
-            />
-            <h3>{category.name}</h3>
-            <p>{category.description}</p>
-          </div>
-        ))}
+        {Array.isArray(categories) && categories.length > 0 ? (
+          categories.map((category) => (
+            <div 
+              key={category.id} 
+              className="category-card" 
+              onClick={() => handleCategoryClick(category.id.toString())} // Ensure category id is passed as string
+              role="button" // Add role for accessibility
+              tabIndex={0} // Make it focusable for keyboard navigation
+              onKeyPress={(e) => e.key === 'Enter' && handleCategoryClick(category.id.toString())} // Handle keyboard navigation
+            >
+              <img 
+                src={category.cat_image} 
+                alt={`${category.name} - ${category.description}`} // More descriptive alt text
+                className="category-image" 
+              />
+              <h3>{category.name}</h3>
+              <p>{category.description}</p>
+            </div>
+          ))
+        ) : (
+          <p>No categories available</p> // Handle case when categories are empty or not an array
+        )}
       </div>
     </div>
   );

@@ -1,49 +1,48 @@
-// src/pages/Login.js
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import config from '../config/config'; // Ensure you import your config
 import '../styles/Auth.css'; // Add styles for authentication pages
 
-const Login = () => {
+const Activation = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [activationCode, setActivationCode] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleActivation = async (e) => {
     e.preventDefault();
 
+    const activationData = { email, code: activationCode };
+
     try {
-      const response = await fetch(`${config.API_BASE_URL}/login/`, {
+      const response = await fetch(`${config.API_BASE_URL}/verify/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(activationData),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to log in');
+        const errorData = await response.json();
+        console.error('Error data:', errorData);
+        throw new Error('Failed to activate');
       }
 
       const data = await response.json();
-      console.log('Login successful:', data);
-
-      // Handle login success (e.g., save token, redirect)
-      // Assuming successful login, redirect to homepage or dashboard
-      alert('Login successful');
-      navigate('/');
+      console.log('Account activated successfully:', data);
+      alert('Account activated successfully! You can now log in.');
+      navigate('/login');
     } catch (error) {
       console.error('Error:', error);
-      setError('Invalid email or password');
+      setError('Error activating account: ' + error.message);
     }
   };
 
   return (
     <div className="auth-container">
-      <form onSubmit={handleLogin}>
-        <h2>Login</h2>
+      <form onSubmit={handleActivation}>
+        <h2>Account Activation</h2>
         {error && <p className="error">{error}</p>}
         <div className="form-group">
           <label>Email:</label>
@@ -55,21 +54,18 @@ const Login = () => {
           />
         </div>
         <div className="form-group">
-          <label>Password:</label>
+          <label>Activation Code:</label>
           <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            type="text"
+            value={activationCode}
+            onChange={(e) => setActivationCode(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Login</button>
-        <p>
-          Don't have an account? <a href="/signup">Sign up</a>
-        </p>
+        <button type="submit">Activate</button>
       </form>
     </div>
   );
 };
 
-export default Login;
+export default Activation;

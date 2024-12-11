@@ -1,121 +1,42 @@
-// src/data/products.js
+import { useEffect, useState } from 'react';
+import config from '../config/config'; // Ensure you have the correct import for the config
 
-import img from '../assets/images/amp2.jpg'; // Importing a single image as an example
+const useProducts = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-const products = [
-  {
-    id: 1,
-    name: 'Speaker 1',
-    category: 'speakers',
-    price: 909.99,
-    image: img,
-  },
-  {
-    id: 2,
-    name: 'Speaker 2',
-    category: 'speakers',
-    price: 999.99,
-    image: img,
-  },
-  {
-    id: 3,
-    name: 'Speaker 3',
-    category: 'speakers',
-    price: 799.99,
-    image: img,
-  },
-  {
-    id: 4,
-    name: 'Amplifier 1',
-    category: 'amplifiers',
-    price: 199.99,
-    image: img,
-  },
-  {
-    id: 5,
-    name: 'Microphone 1',
-    category: 'microphones',
-    price: 49.99,
-    image: img,
-  },
-  {
-    id: 6,
-    name: 'Microphone Rack 1',
-    category: 'microphone-racks',
-    price: 29.99,
-    image: img,
-  },
-  {
-    id: 7,
-    name: 'Microphone Case 1',
-    category: 'microphone-cases',
-    price: 19.99,
-    image: img,
-  },
-  {
-    id: 8,
-    name: 'Power Distributor 1',
-    category: 'power-distributors',
-    price: 79.99,
-    image: img,
-  },
-  {
-    id: 1,
-    name: 'Speaker 1',
-    category: 'speakers',
-    price: 909.99,
-    image: img,
-  },
-  {
-    id: 2,
-    name: 'Speaker 2',
-    category: 'speakers',
-    price: 999.99,
-    image: img,
-  },
-  {
-    id: 3,
-    name: 'Speaker 3',
-    category: 'speakers',
-    price: 799.99,
-    image: img,
-  },
-  {
-    id: 4,
-    name: 'Amplifier 1',
-    category: 'amplifiers',
-    price: 199.99,
-    image: img,
-  },
-  {
-    id: 5,
-    name: 'Microphone 1',
-    category: 'microphones',
-    price: 49.99,
-    image: img,
-  },
-  {
-    id: 6,
-    name: 'Microphone Rack 1',
-    category: 'microphone-racks',
-    price: 29.99,
-    image: img,
-  },
-  {
-    id: 7,
-    name: 'Microphone Case 1',
-    category: 'microphone-cases',
-    price: 19.99,
-    image: img,
-  },
-  {
-    id: 8,
-    name: 'Power Distributor 1',
-    category: 'power-distributors',
-    price: 79.99,
-    image: img,
-  },
-  // Add more products as needed
-];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${config.API_BASE_URL}/products/`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch products');
+        }
 
-export default products;
+        // Get the response text to log it
+        const responseText = await response.text();
+        console.log('Fetched products response text:', responseText);
+
+        // Attempt to parse the response as JSON
+        const data = JSON.parse(responseText);
+
+        // Log the full response data to inspect its structure
+        console.log('Fetched products data:', data);
+
+        setProducts(data.data); // Assuming the response has 'data' with the products
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+        setError('Failed to load products');
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  return { products, loading, error };
+};
+
+export default useProducts;

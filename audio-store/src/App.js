@@ -15,30 +15,39 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Activation from './pages/Activation';
 import { CartProvider } from './context/CartContext';
-import Products from './pages/Products'; // Make sure this is imported
+import Products from './pages/Products';
+import AdminDashboard from './components/AdminDashboard/Admin';
+import UsersPage from './components/AdminDashboard/UsersPage';
+import ProductsPage from './components/AdminDashboard/ProductsPage';
+import OrdersPage from './components/AdminDashboard/OrdersPage';
+import Categories from './components/AdminDashboard/Categories';
 
 function App() {
   return (
     <CartProvider>
       <Router>
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/products" element={<Products />} />
-            <Route path="/products/:category" element={<ProductList />} />
-            <Route path="/product/:id" element={<ProductDetails />} />
-            <Route path="/product-detail/:id" element={<ProductDetails />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/receipt" component={Receipt} />
-            <Route path="/login" element={<Login />} />
-            <Route path='/signup' element={<Signup />} />
-            <Route path="/activation" element={<Activation />} />
-          </Routes>
-        </main>
-        <Footer />
+        <Routes>
+          <Route path="/" element={<><Header /><Home /><Footer /></>} />
+          <Route path="/about" element={<><Header /><About /><Footer /></>} />
+          <Route path="/contact" element={<><Header /><Contact /><Footer /></>} />
+          <Route path="/products" element={<><Header /><Products /><Footer /></>} />
+          <Route path="/products/:category" element={<><Header /><ProductList /><Footer /></>} />
+          <Route path="/product/:id" element={<><Header /><ProductDetails /><Footer /></>} />
+          <Route path="/product-detail/:id" element={<><Header /><ProductDetails /><Footer /></>} />
+          <Route path="/cart" element={<><Header /><Cart /><Footer /></>} />
+          <Route path="/receipt" element={<><Header /><Receipt /><Footer /></>} />
+          <Route path="/login" element={<><Header /><Login /><Footer /></>} />
+          <Route path='/signup' element={<><Header /><Signup /><Footer /></>} />
+          <Route path="/activation" element={<><Header /><Activation /><Footer /></>} />
+          
+          {/* Nested routes under AdminDashboard */}
+          <Route path="/admin" element={<AdminDashboard />}>
+            <Route path="users" element={<UsersPage />} />
+            <Route path="products" element={<ProductsPage />} />
+            <Route path="orders" element={<OrdersPage />} />
+            <Route path="categories" element={<Categories />} />
+          </Route>
+        </Routes>
       </Router>
     </CartProvider>
   );

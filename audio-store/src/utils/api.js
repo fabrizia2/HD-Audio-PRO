@@ -29,3 +29,53 @@ export const fetchData = async (endpoint, options = {}) => {
     }
   }
 };
+
+export const login = async (credentials) => {
+  return await fetchData(`${config.API_BASE_URL}/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(credentials),
+  });
+};
+
+export const createCategory = async (categoryData) => {
+  return await fetchData(`${config.API_BASE_URL}/Admin-categories-create`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(categoryData),
+  });
+};
+
+export const updateCategory = async (categoryId, categoryData) => {
+  return await fetchData(`${config.API_BASE_URL}/Admin-category-Update`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: categoryId, ...categoryData }),
+  });
+};
+
+export const createProduct = async (productData) => {
+  return await fetchData(`${config.API_BASE_URL}/Admin-products-create`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(productData),
+  });
+};
+
+export const updateProduct = async (productId, productData) => {
+  return await fetchData(`${config.API_BASE_URL}/Admin-products-update`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: productId, ...productData }),
+  });
+};

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom'; // Import useHistory for navigation
+import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
 import { useCart } from '../context/CartContext';
 import '../styles/Cart.css';
 import config from '../config/config';
@@ -16,7 +16,7 @@ const Cart = () => {
     paymentPhoneNumber: '',
   });
   const [isProcessing, setIsProcessing] = useState(false); // Add state for processing status
-  const history = useHistory(); // Use useHistory for navigation
+  const navigate = useNavigate(); // Use useNavigate instead of useHistory
 
   const handleChange = (e) => {
     setFormData({
@@ -59,10 +59,7 @@ const Cart = () => {
         clearCart();
 
         // Navigate to the receipt page
-        history.push({
-          pathname: '/receipt',
-          state: { receipt: result },
-        });
+        navigate('/receipt', { state: { receipt: result } });
       }, 5000); // Simulated delay for payment processing
     } catch (error) {
       console.error('Error processing payment:', error);

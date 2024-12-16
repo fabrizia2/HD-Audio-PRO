@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'; // Import useHistory for navigation
 import { useCart } from '../context/CartContext';
 import '../styles/Cart.css';
+import config from '../config/config';
 
 const Cart = () => {
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, removeFromCart, clearCart } = useCart(); // Add clearCart to clear cart after successful purchase
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -13,6 +15,8 @@ const Cart = () => {
     billingAddress: '',
     paymentPhoneNumber: '',
   });
+  const [isProcessing, setIsProcessing] = useState(false); // Add state for processing status
+  const history = useHistory(); // Use useHistory for navigation
 
   const handleChange = (e) => {
     setFormData({
@@ -25,9 +29,47 @@ const Cart = () => {
     removeFromCart(id);
   };
 
-  const handleCheckout = () => {
-    alert('Proceeding to checkout...');
-    // Implement the checkout logic here
+  const handleCheckout = async (e) => {
+    e.preventDefault();
+    setIsProcessing(true); // Set processing status to true
+    try {
+      const response = await fetch(`${config.API_BASE_URL}/mpesa-payment/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          cartItems,
+          ...formData,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Payment failed');
+      }
+
+      const result = await response.json();
+
+      // Simulate receiving a push notification for PIN entry
+      alert('Please enter your PIN on your phone to complete the transaction.');
+
+      // Simulate waiting for payment confirmation
+      setTimeout(() => {
+        // Clear the cart after successful purchase
+        clearCart();
+
+        // Navigate to the receipt page
+        history.push({
+          pathname: '/receipt',
+          state: { receipt: result },
+        });
+      }, 5000); // Simulated delay for payment processing
+    } catch (error) {
+      console.error('Error processing payment:', error);
+      alert('Payment failed. Please try again.');
+    } finally {
+      setIsProcessing(false); // Reset processing status
+    }
   };
 
   const calculateTotalPrice = () => {
@@ -139,8 +181,8 @@ const Cart = () => {
             <button type="button" className="cancel-button" onClick={() => alert('Cancel')}>
               Cancel
             </button>
-            <button type="submit" className="complete-purchase-button">
-              Complete Purchase
+            <button type="submit" className="complete-purchase-button" disabled={isProcessing}>
+              {isProcessing ? 'Processing...' : 'Complete Purchase'}
             </button>
           </div>
         </form>

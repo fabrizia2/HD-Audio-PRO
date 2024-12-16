@@ -133,7 +133,7 @@ nav ul li a:hover {
     position: absolute;
     top: 40px; /* Adjust this to position below the header */
     right: 75px; /* Align it to the right */
-    width:100px; /* Set to auto to not take full width */
+    width: 100px; /* Set to auto to not take full width */
     max-width: 50%; /* Set a max width for the nav */
     padding: 10px; /* Adjusted padding for spacing */
     z-index: 1000; /* Ensure it is above other elements */

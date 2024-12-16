@@ -14,6 +14,10 @@ const Header = () => {
     setIsOpen(!isOpen); // Toggle the menu open/close state
   };
 
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
   const handleScroll = () => {
     if (window.scrollY > 50) {
       setIsTransparent(true);
@@ -24,11 +28,17 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    document.addEventListener('click', (e) => {
+      if (isOpen && !e.target.closest('nav') && !e.target.closest('.hamburger')) {
+        closeMenu();
+      }
+    });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('click', closeMenu);
     };
-  }, []);
+  }, [isOpen]);
 
   return (
     <header className={isTransparent ? 'transparent' : ''}>
@@ -40,17 +50,17 @@ const Header = () => {
       </div>
       <nav>
         <ul className={isOpen ? 'active' : ''}>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/products">Products</Link></li>
+          <li><Link to="/" onClick={closeMenu}>Home</Link></li>
+          <li><Link to="/products" onClick={closeMenu}>Products</Link></li>
           <li>
-            <Link to="/cart" className="cart-link">
+            <Link to="/cart" className="cart-link" onClick={closeMenu}>
               <FontAwesomeIcon icon={faShoppingCart} />
               {cartItems.length > 0 && <span className="cart-count">{cartItems.length}</span>} Cart
             </Link>
           </li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/about" onClick={closeMenu}>About</Link></li>
+          <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
+          <li><Link to="/login" onClick={closeMenu}>Login</Link></li>
         </ul>
       </nav>
     </header>

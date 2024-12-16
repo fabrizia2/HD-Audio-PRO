@@ -10,6 +10,7 @@ import Footer from './components/Footer';
 import ProductList from './pages/ProductList';
 import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
+import Receipt from './pages/Receipt';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Activation from './pages/Activation';
@@ -31,6 +32,7 @@ function App() {
             <Route path="/product/:id" element={<ProductDetails />} />
             <Route path="/product-detail/:id" element={<ProductDetails />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/receipt" component={Receipt} />
             <Route path="/login" element={<Login />} />
             <Route path='/signup' element={<Signup />} />
             <Route path="/activation" element={<Activation />} />

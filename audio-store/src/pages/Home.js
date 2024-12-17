@@ -15,13 +15,13 @@ const Home = () => {
           showStatus={false}
         >
           <div>
-            <img src="/assets/images/amp3.png" alt="Hero 1" />
+            <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734430595/amp4_ddtx4j.png" alt="Hero 1" />
           </div>
           <div>
-            <img src="/assets/images/mic1.jpg" alt="Hero 2" />
+            <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734430168/micro2_tqfstc.jpg" alt="Hero 2" />
           </div>
           <div>
-            <img src="/assets/images/amp4.png" alt="Hero 3" />
+            <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734429419/mic1_y1oslv.jpg" alt="Hero 3" />
           </div>
         </Carousel>
         <div className="hero-content">
@@ -33,12 +33,12 @@ const Home = () => {
       {/* Categories Section */}
       <div className="categories">
         <div className="category">
-          <img src="/assets/images/speaker1.jpg" alt="Speakers" />
-          <h2>Speakers</h2>
-          <p>High-quality speakers for your audio needs.</p>
+          <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734430168/micro2_tqfstc.jpg" alt="Speakers" />
+          <h2>Microphone cases</h2>
+          <p>High-quality cases for your audio needs.</p>
         </div>
         <div className="category">
-          <img src="/assets/images/amp2.jpg" alt="Amplifiers" />
+          <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734430590/amp3_nsyrhn.png" alt="Amplifiers" />
           <h2>Amplifiers</h2>
           <p>Powerful amplifiers to boost your sound.</p>
         </div>

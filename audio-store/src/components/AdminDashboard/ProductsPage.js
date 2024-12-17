@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { createProduct, updateProduct } from '../../utils/api'; // Ensure correct import path
 import config from '../../config/config';
 
 const ProductsPage = () => {
-  const [products, setProducts] = useState([]); // Default to an empty array
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [newProduct, setNewProduct] = useState({ title: '', description: '', category: '', price: '', image: '' });
-  const [productToEdit, setProductToEdit] = useState(null);
+    const [products, setProducts] = useState([]);
+    const [categories, setCategories] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [newProduct, setNewProduct] = useState({
+      title: '',
+      description: '',
+      category: '',
+      price: '',
+      image: ''
+    });
+    const [productToEdit, setProductToEdit] = useState(null);
 
   // Fetch products on component mount
   useEffect(() => {
@@ -15,6 +21,7 @@ const ProductsPage = () => {
       try {
         const response = await fetch(`${config.API_BASE_URL}/products/`);
         const data = await response.json();
+        console.log('Fetched products:', data); // Log the fetched products
         setProducts(data.data || []); // Ensure 'data' exists and is an array
         setLoading(false);
       } catch (error) {
@@ -24,30 +31,91 @@ const ProductsPage = () => {
       }
     };
 
-    fetchProducts();
-  }, []);
+    const fetchCategories = async () => {
+        try {
+          const response = await fetch(`${config.API_BASE_URL}/categories/`);
+          const data = await response.json();
+          setCategories(data.data || []);
+        } catch (error) {
+          console.error('Failed to fetch categories:', error);
+          setError('Failed to load categories');
+        }
+      };
+  
+      fetchProducts();
+      fetchCategories();
+    }, []);
 
+  // Create product function
   const handleCreateProduct = async () => {
     try {
-      const response = await createProduct(newProduct);
-      console.log('Product created:', response);
-      setProducts([...products, response]);
-      setNewProduct({ title: '', description: '', category: '', price: '', image: '' });
+      const response = await fetch(`${config.API_BASE_URL}/admin-products-create/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify(newProduct),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create product');
+      }
+
+      const createdProduct = await response.json();
+      setProducts([...products, createdProduct]);
+      setNewProduct({
+        title: '',
+        description: '',
+        category: '',
+        price: '',
+        image: ''
+      });
+      console.log('Product created:', createdProduct);
     } catch (error) {
-      console.error('Failed to create product:', error);
+      console.error('Error creating product:', error);
+      setError('Failed to create product');
     }
   };
 
-  const handleUpdateProduct = async () => {
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0OTcxMTgxLCJpYXQiOjE3MzM0MzUxODEsImp0aSI6IjQxNDAxZDliNWI0YTQ1ZDE5NWNjOWMzMWZhODhmZDg2IiwidXNlcl9pZCI6Mn0.KiJUAxz6aRtHUqLArEloEC8qYUQKhtB86NebB5DzwGY';
+
+  // Update product function
+  const handleUpdateProduct = async (productId, productData) => {
     try {
-      const response = await updateProduct(productToEdit.id, productToEdit);
-      console.log('Product updated:', response);
-      setProducts(products.map(prod => (prod.id === productToEdit.id ? response : prod)));
+  
+      // Send the update request
+      const response = await fetch(`${config.API_BASE_URL}/update-product/${productId}/`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`, // Add the Authorization header with Bearer token
+        },
+        body: JSON.stringify({ id: productId, ...productData }),
+      });
+  
+      // Check if the response is OK
+      if (!response.ok) {
+        throw new Error('Failed to update product');
+      }
+  
+      // Parse the response data (updated product)
+      const updatedProduct = await response.json();
+  
+      // Update the local state with the updated product
+      setProducts((prevProducts) =>
+        prevProducts.map((p) => (p.id === productId ? updatedProduct : p))
+      );
+  
+      // Reset the productToEdit state to null or handle accordingly
       setProductToEdit(null);
+  
+      console.log('Product updated:', updatedProduct);
     } catch (error) {
-      console.error('Failed to update product:', error);
+      console.error('Error updating product:', error);
+      setError('Failed to update product');
     }
-  };
+  };  
 
   if (loading) {
     return <div>Loading products...</div>;
@@ -81,7 +149,11 @@ const ProductsPage = () => {
           onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
         >
           <option value="">Select Category</option>
-          {/* Populate with categories when they are available */}
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
         </select>
         <input
           type="text"
@@ -133,7 +205,7 @@ const ProductsPage = () => {
             onChange={(e) => setProductToEdit({ ...productToEdit, image: e.target.value })}
             placeholder="Product Image URL"
           />
-          <button onClick={handleUpdateProduct}>Update Product</button>
+          <button onClick={() => handleUpdateProduct(productToEdit.id, productToEdit)}>Update Product</button>
         </div>
       )}
 
@@ -142,13 +214,13 @@ const ProductsPage = () => {
         <h3>Product List</h3>
         <ul>
           {products && products.length > 0 ? (
-            products.map(prod => (
-              <li key={prod.id}>
-                <h4>{prod.title}</h4>
-                <p>{prod.description}</p>
-                <p>Category: {prod.category}</p>
-                <p>Price: ${prod.price}</p>
-                <img src={prod.image} alt={prod.title} style={{ width: '100px' }} />
+            products.map((prod, index) => (
+              <li key={index}>
+                <h4>{prod.title || 'No title'}</h4>
+                <p>{prod.description || 'No description'}</p>
+                <p>Category: {prod.category || 'No category'}</p>
+                <p>Price: ${prod.price || 'No price'}</p>
+                <img src={prod.image || ''} alt={prod.title || 'No image'} style={{ width: '100px' }} />
                 <button onClick={() => setProductToEdit(prod)}>Edit</button>
               </li>
             ))

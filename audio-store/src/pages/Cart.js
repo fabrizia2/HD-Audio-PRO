@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate instead of useHistory
 import { useCart } from '../context/CartContext';
 import '../styles/Cart.css';
 import config from '../config/config';
 
 const Cart = () => {
-  const { cartItems, removeFromCart, clearCart } = useCart(); // Add clearCart to clear cart after successful purchase
+  const { cartItems, removeFromCart } = useCart(); // Removed clearCart from destructuring
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
     email: '',
     phoneNumber: '',
-    shippingAddress: '',
-    billingAddress: '',
-    paymentPhoneNumber: '',
   });
-  const [isProcessing, setIsProcessing] = useState(false); // Add state for processing status
-  const navigate = useNavigate(); // Use useNavigate instead of useHistory
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -31,43 +24,46 @@ const Cart = () => {
 
   const handleCheckout = async (e) => {
     e.preventDefault();
-    setIsProcessing(true); // Set processing status to true
+    setIsProcessing(true);
     try {
+      const totalAmount = calculateTotalPrice(); // Calculate the total price
       const response = await fetch(`${config.API_BASE_URL}/mpesa-payment/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          cartItems,
-          ...formData,
+          amount: totalAmount,
+          customer: {
+            email: formData.email,
+            phone_number: formData.phoneNumber,
+          },
         }),
       });
-
+  
       if (!response.ok) {
         throw new Error('Payment failed');
       }
-
+  
       const result = await response.json();
-
-      // Simulate receiving a push notification for PIN entry
-      alert('Please enter your PIN on your phone to complete the transaction.');
-
-      // Simulate waiting for payment confirmation
-      setTimeout(() => {
-        // Clear the cart after successful purchase
-        clearCart();
-
-        // Navigate to the receipt page
-        navigate('/receipt', { state: { receipt: result } });
-      }, 5000); // Simulated delay for payment processing
+      console.log('Payment API result:', result); // Log the entire response for debugging
+  
+      // Check if the payment_link is available in the response
+      if (result.payment_link) {
+        // Redirect user to the Flutterwave payment link
+        window.location.href = result.payment_link;
+      } else {
+        throw new Error('Payment link not found in the response');
+      }
     } catch (error) {
       console.error('Error processing payment:', error);
       alert('Payment failed. Please try again.');
     } finally {
-      setIsProcessing(false); // Reset processing status
+      setIsProcessing(false);
     }
   };
+  
+  
 
   const calculateTotalPrice = () => {
     return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
@@ -113,22 +109,6 @@ const Cart = () => {
             <h3>Personal Details</h3>
             <div className="form-group">
               <input
-                type="text"
-                name="firstName"
-                placeholder="Enter First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Enter Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
                 type="email"
                 name="email"
                 placeholder="Enter Email"
@@ -143,43 +123,13 @@ const Cart = () => {
                 onChange={handleChange}
               />
             </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="shippingAddress"
-                placeholder="Enter Shipping Address"
-                value={formData.shippingAddress}
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                name="billingAddress"
-                placeholder="Enter Billing Address"
-                value={formData.billingAddress}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="paymentPhoneNumber"
-                placeholder="Enter Payment Phone Number"
-                value={formData.paymentPhoneNumber}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <h3>Choose Payment Provider</h3>
-          <div className="payment-providers">
-            <img src="https://www.unitedwomensacco.co.ke/wp-content/uploads/2020/02/MPESA.png" alt="M-Pesa" />
-            <img src="https://pluspng.com/img-png/airtel-logo-png-airtel-reveals-new-global-identity-855.jpg" alt="Airtel" />
           </div>
           <div className="form-buttons">
             <button type="button" className="cancel-button" onClick={() => alert('Cancel')}>
               Cancel
             </button>
             <button type="submit" className="complete-purchase-button" disabled={isProcessing}>
-              {isProcessing ? 'Processing...' : 'Complete Purchase'}
+              {isProcessing ? 'Processing...' : 'Checkout'}
             </button>
           </div>
         </form>

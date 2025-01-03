@@ -24,10 +24,16 @@ const Home = () => {
             <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734429419/mic1_y1oslv.jpg" alt="Hero 3" />
           </div>
         </Carousel>
-        <div className="hero-content">
-          <h1>Welcome to <span>hd audio pro</span> Store</h1>
-          <p>Your one-stop shop for all audio equipment and accessories.</p>
-        </div>
+        
+      </div>
+
+      <div className="about-container">
+        <h2>About Us</h2>
+        <p>
+            HD AUDIO is a New Range of Acoustically Designed Professional Sound Systems made with the Pro end User in Mind & Especially for the Ever Evolving Sound technology space.
+
+            MICROPHONES •AMPLIFIERS • SPEAKERS • AUDIO ACCESORIES
+        </p>
       </div>
 
       {/* Categories Section */}
@@ -56,29 +62,35 @@ const Home = () => {
       </div>
 
       {/* Testimonials Section */}
-      <div className="testimonials">
-        <h2>What Our Customers Say</h2>
-        <Carousel 
-          autoPlay 
-          infiniteLoop 
-          showThumbs={false} 
-          showStatus={false}
-          interval={4000}  // Set interval for carousel transition
-        >
-          <div className='testimonial-card'>
-            <p>"This store offers the best audio equipment I've ever used! The speakers are incredible, and my sound system has never been better!"</p>
-            <p>- John Doe</p>
-          </div>
-          <div className='testimonial-card'>
-            <p>"I can't believe the quality of the amplifiers I purchased. Definitely worth every penny! Highly recommend."</p>
-            <p>- Jane Smith</p>
-          </div>
-          <div className='testimonial-card'>
-            <p>"The microphones here are top-notch. Perfect for my recording studio. The sound clarity is amazing."</p>
-            <p>- Mike Johnson</p>
-          </div>
-        </Carousel>
-      </div>
+      <section>
+          
+        <div className="logos">
+            <div className="logoi">
+              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884358/jaz_hjlsxk.jpg" alt="Microphones" /> </a>
+            </div>
+
+            <div className="logoi">
+              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884492/572cOi2Uu1jIdAAiRobSdRb2bFepjD0DZGx1ikVpxWNl4kc63uf8O-KfNLp5SBWxYBP5apgVxHw_s900-c-k-c0x00ffffff-no-rj_fjx5jc.jpg" alt="Microphones" /> </a>
+            </div>
+
+            <div className="logoi">
+              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884681/Skyward_20Express_20Logo300x150-01_z2zptq.png" alt="Microphones" /> </a>
+            </div>
+
+            <div className="logoi">
+              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884844/1630518832688_rkgzsl.jpg" alt="Microphones" /> </a>
+            </div>
+
+            <div className="logoi">
+              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884961/Britam-Holdings-fb_mrt8v1.png" alt="Microphones" /> </a>
+            </div>
+
+            <div className="logoi">
+              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735885098/jw-icon-unplated_kda8xs.png" alt="Microphones" /> </a>
+            </div>
+
+        </div>
+      </section>
 
       
     </div>

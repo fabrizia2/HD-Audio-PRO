@@ -42,7 +42,10 @@ const Header = () => {
 
   return (
     <header className={isTransparent ? 'transparent' : ''}>
-      <h1>HD AUDIO PRO</h1>
+      <Link to="/" className="logo" onClick={closeMenu}>
+        <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/c_crop,ar_1:1/v1734430585/HD_Logo_rkrghj.jpg" alt="HD Audio Pro" />
+        <h1>HD AUDIO PRO</h1>
+      </Link>
       <div className={`hamburger ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
         <div></div>
         <div></div>

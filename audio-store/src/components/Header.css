@@ -35,6 +35,16 @@ header h1 {
   animation: textGlow 1.5s ease-in-out infinite alternate;
 }
 
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  width: 60px;
+  height: 50px;
+  margin-right: 10px;
+}
+
 @keyframes textGlow {
   from {
     text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #00e, 0 0 30px #00e, 0 0 40px #00e, 0 0 55px #00e, 0 0 75px #00e;
@@ -90,7 +100,7 @@ nav ul li a:hover {
   position: absolute;
   top: -5px;
   left: 5px;
-  background-color: red;
+  background-color: rgb(8, 8, 8);
   color: white;
   border-radius: 50%;
   padding: 2px 6px;
@@ -99,10 +109,17 @@ nav ul li a:hover {
 }
 
 .hamburger {
-  display: none;
+  display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  position: absolute;
+  top: 50%;
+  right: 20px; /* Adjust for padding */
+  transform: translateY(-50%);
+  width: 30px;
+  height: 25px;
   cursor: pointer;
-  z-index: 1001;
+  z-index: 10; /* Ensure it appears above other elements */
 }
 
 .hamburger div {
@@ -111,6 +128,7 @@ nav ul li a:hover {
   background-color: white;
   margin: 4px 0;
   transition: all 0.3s ease;
+  align-items: flex-end;
 }
 
 /* Responsive design */
@@ -123,7 +141,7 @@ nav ul li a:hover {
     margin-right: 5px; /* Remove right margin to prevent overflow */
   }
   h1 {
-    font-size: 1px;
+    display: none; /* Hide the h1 on smaller screens */
   }
   nav ul {
     flex-direction: column;
@@ -159,6 +177,7 @@ nav ul li a:hover {
 
   .hamburger {
     display: flex;
+    right: 35px;
   }
 
   .hamburger.active div:nth-child(1) {

@@ -1,6 +1,7 @@
 // src/components/Footer.js
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/Footer.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faTwitter, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
@@ -9,7 +10,10 @@ const Footer = () => {
   return (
     <footer>
       <div className="footer-content">
-        <h2>HD Audio PRO</h2>
+        <Link to="/" className="logo">
+          <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/c_crop,ar_1:1/v1734430585/HD_Logo_rkrghj.jpg" alt="HD Audio Pro" />
+          <h2>HD AUDIO PRO</h2>
+        </Link>
         <ul className="footer-nav">
           <li><a href="/">Home</a></li>
           <li><a href="/products">Products</a></li>

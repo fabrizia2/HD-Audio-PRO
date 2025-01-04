@@ -12,8 +12,8 @@ const Footer = () => {
       <div className="footer-content">
         <div className='slogan'>
           <Link to="/" className="logo">
-            <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/c_crop,ar_1:1/v1734430585/HD_Logo_rkrghj.jpg" alt="HD Audio Pro" />
-            <h2>HD AUDIO “THE FURUTE SOUND”</h2>
+            <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1736023164/hddd-removebg-preview_sbuwez.png" alt="HD Audio Pro" />
+            <h2>“THE FUTURE SOUND”</h2>
           </Link>
         </div>
         <ul className="footer-nav">

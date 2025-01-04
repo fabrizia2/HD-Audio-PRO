@@ -3,6 +3,13 @@
   padding: 0;
 }
 
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden;
+}
+
 .video-container {  /* Target the added class for responsiveness */
   position: relative;
   padding-bottom: 56.25%; /* Maintain aspect ratio (adjust if needed) */
@@ -20,32 +27,45 @@
   pointer-events: none; /* Prevents interactions with the video */
 }
 
-
-.carousel {
+.hero-content {
+  position: relative;
+  z-index: 1; /* Places content above the video */
+  text-align: center;
+  color: white;
   display: flex;
-  position: absolute;
-  width: 100%;
-  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 10%; /* Centers content vertically */
+  padding: 20px;
+  margin-top: 15%;
 }
 
-.carousel-item {
-  flex: 1;
-  min-width: 100%;
-  background-size: contain;
-  background-position: center;
-  transition: opacity 1s ease-in-out;
-}
-
-.hero .carousel .slide {
-  background: none;
-  height: 100%; /* Ensure the carousel slide takes full height */
-}
-
-.hero img {
+.hero-content h1 {
+  color: #fff;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 24px;
   margin: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: contain; /* Ensure the entire image is displayed without cropping */
+  padding: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  animation: textGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  from {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px rgb(12, 12, 19), 0 0 30px rgb(15, 15, 15), 0 0 40px rgb(20, 20, 20), 0 0 55px rgb(20, 20, 20), 0 0 75px rgb(17, 17, 17);
+  }
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px rgb(10, 10, 10), 0 0 60px rgb(15, 15, 15), 0 0 70px rgb(8, 8, 8), 0 0 80px rgb(10, 10, 10), 0 0 100px rgb(7, 7, 7);
+  }
+}
+
+.hero-content button {
+  font-size: 2.0rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adds readability */
+  margin-top: 50%;
+  bottom: 0;
 }
 
 .hero-content {
@@ -55,33 +75,8 @@
   transform: translate(-50%, -50%);
   color: white;
   text-align: center;
-  background: rgba(0, 0, 0, 0.5);
   padding: 1rem;
   border-radius: 8px;
-}
-
-.hero-content h1, h2 {
-  font-size: 2rem;
-  text-transform: uppercase;
-}
-
-.hero span {
-  letter-spacing: 2px;
-  animation: textGlow 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes textGlow {
-  from {
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #00e, 0 0 30px #00e, 0 0 40px #00e, 0 0 55px #00e, 0 0 75px #00e;
-  }
-  to {
-    text-shadow: 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff, 0 0 50px #00e, 0 0 60px #00e, 0 0 70px #00e, 0 0 80px #00e, 0 0 100px #00e;
-  }
-}
-
-
-.hero-content p {
-  font-size: 1.2rem;
 }
 
 .about-container{
@@ -245,7 +240,39 @@
     width: 90%;
     margin: 1rem auto;
   }
-  .logoi {
-    flex: 0 0 calc(50% - 20px); /* Set width for each item (2 items per row) */
+
+  .hero {
+    height: 40vh; /* Full viewport height */
+    overflow: hidden;
+    background: #000;
+  }
+
+  .hero-content button {
+    font-size: 1.0rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adds readability */
+    margin-top: 15%;
+    bottom: 0;
+  }
+  
+  .hero-content {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 8px;
+  }
+  
+  .hero-content h1 {
+    color: #fff;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 18px;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    animation: textGlow 1.5s ease-in-out infinite alternate;
   }
 }

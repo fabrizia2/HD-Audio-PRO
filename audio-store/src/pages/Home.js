@@ -1,31 +1,25 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
 import '../styles/Home.css';
 
 const Home = () => {
   return (
     <div className="home">
-      <div className="hero">
-        <Carousel 
-          autoPlay 
-          infiniteLoop 
-          showThumbs={false} 
-          showStatus={false}
-        >
-          <div>
-            <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734430595/amp4_ddtx4j.png" alt="Hero 1" />
-          </div>
-          <div>
-            <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734430168/micro2_tqfstc.jpg" alt="Hero 2" />
-          </div>
-          <div>
-            <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734429419/mic1_y1oslv.jpg" alt="Hero 3" />
-          </div>
-        </Carousel>
-        
+      <div className="hero video-container">
+        <iframe
+          width="900"
+          height={450}
+          className="hero-video"
+          src="https://www.youtube.com/embed/Vi4D_o7fIVE?autoplay=1&loop=1&playlist=Vi4D_o7fIVE&mute=1"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          referrerPolicy="strict-origin-when-cross-origin"
+        ></iframe>
       </div>
+
 
       <div className="about-container">
         <h2>About Us</h2>

@@ -235,24 +235,11 @@
 
 /* Mobile View */
 @media only screen and (max-width: 768px) {
-  .hero {
-    height: 40vh; /* Adjust height for smaller screens */
-  }
-
-  .hero-content {
-    width: 90%;
-    top: 35%; /* Adjust position for better visibility */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 0.5rem;
-  }
-
-  .hero-content h1{
-    font-size: 1.5rem; /* Adjust font size for smaller screens */
-  }
-
-  .hero-content p {
-    font-size: 1rem; /* Adjust font size for smaller screens */
+  .video-container {  /* Target the added class for responsiveness */
+    position: relative;
+    padding-bottom: 56.25%; /* Maintain aspect ratio (adjust if needed) */
+    height: 0vh;
+    overflow: hidden;
   }
   .category {
     width: 90%;

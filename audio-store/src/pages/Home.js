@@ -30,9 +30,11 @@ const Home = () => {
       <div className="about-container">
         <h2>About Us</h2>
         <p>
-            HD AUDIO is a New Range of Acoustically Designed Professional Sound Systems made with the Pro end User in Mind & Especially for the Ever Evolving Sound technology space.
+          HD AUDIO is a New Range of Acoustically Designed Professional Audio Gear made with Sound Engineers in Mind ,especially for the ever evolving Sound technology requirements.
 
-            MICROPHONES •AMPLIFIERS • SPEAKERS • AUDIO ACCESORIES
+          We are the industry leaders in the design, and distribution of premium sound reinforcement technologies & Audio Visual accesories 
+          <br></br><br></br>
+          MICROPHONES •AMPLIFIERS • SPEAKERS • MIXERS •AUDIO VISUAL ACCESORIES
         </p>
       </div>
 

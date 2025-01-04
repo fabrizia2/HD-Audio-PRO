@@ -35,12 +35,20 @@ header h1 {
   animation: textGlow 1.5s ease-in-out infinite alternate;
 }
 
+.slogan {
+  display: flex;
+  flex-direction: column; /* Stack logo and h1 vertically */
+  align-items: center; /* Center them horizontally */
+  text-align: center; /* Optional, makes text centered in h1 */
+}
+
 .logo {
   display: flex;
+  flex-direction: column;
   align-items: center;
 }
 .logo img {
-  width: 60px;
+  width: 80px;
   height: 50px;
   margin-right: 10px;
 }
@@ -140,8 +148,8 @@ nav ul li a:hover {
   nav {
     margin-right: 5px; /* Remove right margin to prevent overflow */
   }
-  h1 {
-    display: none; /* Hide the h1 on smaller screens */
+  header h1 {
+    display: none;
   }
   nav ul {
     flex-direction: column;

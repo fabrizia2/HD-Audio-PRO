@@ -1,236 +1,335 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react"
 import config from '../../config/config';
+import '../../assets/styles/productsPage.css'
 
 const ProductsPage = () => {
-    const [products, setProducts] = useState([]);
-    const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [newProduct, setNewProduct] = useState({
-      title: '',
-      description: '',
-      category: '',
-      price: '',
-      image: ''
-    });
-    const [productToEdit, setProductToEdit] = useState(null);
+  const [products, setProducts] = useState([])
+  const [categories, setCategories] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [newProduct, setNewProduct] = useState({
+    title: "",
+    description: "",
+    category: "",
+    price: "",
+    image_1: "",
+    image_2: "",
+    image_3: "",
+    image_4: "",
+  })
+  const [productToEdit, setProductToEdit] = useState(null)
 
-  // Fetch products on component mount
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4ODk4NzM0LCJpYXQiOjE3MzczNjI3MzQsImp0aSI6IjA2OWRkZTA0NWIxZjQ5OGViOWRjZmVmMTQ0YWE4ZDcxIiwidXNlcl9pZCI6MX0.ntJ1lqcs0eddyBAhh3H9Ou9Gl6u-9zv-GTsKhQtkUKg"
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch(`${config.API_BASE_URL}/products/`);
-        const data = await response.json();
-        console.log('Fetched products:', data); // Log the fetched products
-        setProducts(data.data || []); // Ensure 'data' exists and is an array
-        setLoading(false);
+        const response = await fetch(`${config.API_BASE_URL}/products/`)
+        const data = await response.json()
+        setProducts(data.data || [])
+        setLoading(false)
       } catch (error) {
-        console.error('Failed to fetch products:', error);
-        setError('Failed to load products');
-        setLoading(false);
+        console.error("Failed to fetch products:", error)
+        setError("Failed to load products")
+        setLoading(false)
       }
-    };
+    }
 
     const fetchCategories = async () => {
-        try {
-          const response = await fetch(`${config.API_BASE_URL}/categories/`);
-          const data = await response.json();
-          setCategories(data.data || []);
-        } catch (error) {
-          console.error('Failed to fetch categories:', error);
-          setError('Failed to load categories');
-        }
-      };
-  
-      fetchProducts();
-      fetchCategories();
-    }, []);
+      try {
+        const response = await fetch(`${config.API_BASE_URL}/categories/`)
+        const data = await response.json()
+        setCategories(data.data || [])
+      } catch (error) {
+        console.error("Failed to fetch categories:", error)
+        setError("Failed to load categories")
+      }
+    }
 
-  // Create product function
+    fetchProducts()
+    fetchCategories()
+  }, [])
+
   const handleCreateProduct = async () => {
     try {
-      const response = await fetch(`${config.API_BASE_URL}/admin-products-create/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-        body: JSON.stringify(newProduct),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to create product');
+      const formattedProduct = {
+        ...newProduct,
+        price: typeof newProduct.price === "number" ? newProduct.price.toFixed(2) : newProduct.price,
       }
 
-      const createdProduct = await response.json();
-      setProducts([...products, createdProduct]);
+      const response = await fetch(`${config.API_BASE_URL}/admin-products-create/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(formattedProduct),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.message || "Failed to create product")
+      }
+
+      const createdProduct = await response.json()
+      setProducts([...products, createdProduct])
       setNewProduct({
-        title: '',
-        description: '',
-        category: '',
-        price: '',
-        image: ''
-      });
-      console.log('Product created:', createdProduct);
+        title: "",
+        description: "",
+        category: "",
+        price: "",
+        image_1: "",
+        image_2: "",
+        image_3: "",
+        image_4: "",
+      })
+      console.log("Product created:", createdProduct)
     } catch (error) {
-      console.error('Error creating product:', error);
-      setError('Failed to create product');
+      console.error("Error creating product:", error)
+      setError("Failed to create product")
     }
-  };
+  }
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0OTcxMTgxLCJpYXQiOjE3MzM0MzUxODEsImp0aSI6IjQxNDAxZDliNWI0YTQ1ZDE5NWNjOWMzMWZhODhmZDg2IiwidXNlcl9pZCI6Mn0.KiJUAxz6aRtHUqLArEloEC8qYUQKhtB86NebB5DzwGY';
-
-  // Update product function
   const handleUpdateProduct = async (productId, productData) => {
     try {
-  
-      // Send the update request
-      const response = await fetch(`${config.API_BASE_URL}/update-product/${productId}/`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Add the Authorization header with Bearer token
-        },
-        body: JSON.stringify({ id: productId, ...productData }),
-      });
-  
-      // Check if the response is OK
-      if (!response.ok) {
-        throw new Error('Failed to update product');
+      const formattedProduct = {
+        ...productData,
+        price: typeof productData.price === "number" ? productData.price.toFixed(2) : productData.price,
       }
-  
-      // Parse the response data (updated product)
-      const updatedProduct = await response.json();
-  
-      // Update the local state with the updated product
-      setProducts((prevProducts) =>
-        prevProducts.map((p) => (p.id === productId ? updatedProduct : p))
-      );
-  
-      // Reset the productToEdit state to null or handle accordingly
-      setProductToEdit(null);
-  
-      console.log('Product updated:', updatedProduct);
+
+      const response = await fetch(`${config.API_BASE_URL}/update-product/${productId}/`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id: productId, ...formattedProduct }),
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to update product")
+      }
+
+      const updatedProduct = await response.json()
+      setProducts((prevProducts) => prevProducts.map((p) => (p.id === productId ? updatedProduct : p)))
+      setProductToEdit(null)
+
+      console.log("Product updated:", updatedProduct)
     } catch (error) {
-      console.error('Error updating product:', error);
-      setError('Failed to update product');
+      console.error("Error updating product:", error)
+      setError("Failed to update product")
     }
-  };  
-
-  if (loading) {
-    return <div>Loading products...</div>;
   }
 
-  if (error) {
-    return <div>{error}</div>;
+  const handleDeleteProduct = async (productId) => {
+    try {
+      const response = await fetch(`${config.API_BASE_URL}/delete-product/${productId}/`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (!response.ok) {
+        throw new Error("Failed to delete product")
+      }
+
+      setProducts((prevProducts) => prevProducts.filter((p) => p.id !== productId))
+      console.log("Product deleted:", productId)
+    } catch (error) {
+      console.error("Error deleting product:", error)
+      setError("Failed to delete product")
+    }
   }
+
+  if (loading) return <div>Loading products...</div>
+  if (error) return <div>{error}</div>
 
   return (
-    <div>
-      <h2>Products</h2>
+    <div className="products-container">
+      <h2 className="products-title">Products</h2>
 
       {/* New Product Form */}
-      <div>
-        <h3>Create New Product</h3>
-        <input
-          type="text"
-          value={newProduct.title}
-          onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
-          placeholder="Product Title"
-        />
-        <input
-          type="text"
-          value={newProduct.description}
-          onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-          placeholder="Product Description"
-        />
-        <select
-          value={newProduct.category}
-          onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
-        >
-          <option value="">Select Category</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-        <input
-          type="text"
-          value={newProduct.price}
-          onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
-          placeholder="Product Price"
-        />
-        <input
-          type="text"
-          value={newProduct.image}
-          onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
-          placeholder="Product Image URL"
-        />
-        <button onClick={handleCreateProduct}>Create Product</button>
-      </div>
-
-      {/* Edit Product Form */}
-      {productToEdit && (
-        <div>
-          <h3>Edit Product</h3>
+      <div className="product-form">
+        <h3 className="form-title">Create New Product</h3>
+        <div className="form-grid">
           <input
             type="text"
-            value={productToEdit.title}
-            onChange={(e) => setProductToEdit({ ...productToEdit, title: e.target.value })}
+            value={newProduct.title}
+            onChange={(e) => setNewProduct({ ...newProduct, title: e.target.value })}
             placeholder="Product Title"
+            className="form-input"
           />
           <input
             type="text"
-            value={productToEdit.description}
-            onChange={(e) => setProductToEdit({ ...productToEdit, description: e.target.value })}
+            value={newProduct.description}
+            onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
             placeholder="Product Description"
+            className="form-input"
           />
           <select
-            value={productToEdit.category}
-            onChange={(e) => setProductToEdit({ ...productToEdit, category: e.target.value })}
+            value={newProduct.category}
+            onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
+            className="form-select"
           >
             <option value="">Select Category</option>
-            {/* Populate with categories when they are available */}
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
           </select>
           <input
-            type="text"
-            value={productToEdit.price}
-            onChange={(e) => setProductToEdit({ ...productToEdit, price: e.target.value })}
+            type="number"
+            value={newProduct.price}
+            onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
             placeholder="Product Price"
+            className="form-input"
+            step="0.01"
           />
           <input
             type="text"
-            value={productToEdit.image}
-            onChange={(e) => setProductToEdit({ ...productToEdit, image: e.target.value })}
-            placeholder="Product Image URL"
+            value={newProduct.image_1}
+            onChange={(e) => setNewProduct({ ...newProduct, image_1: e.target.value })}
+            placeholder="Product Image 1 URL"
+            className="form-input"
           />
-          <button onClick={() => handleUpdateProduct(productToEdit.id, productToEdit)}>Update Product</button>
+          <input
+            type="text"
+            value={newProduct.image_2}
+            onChange={(e) => setNewProduct({ ...newProduct, image_2: e.target.value })}
+            placeholder="Product Image 2 URL"
+            className="form-input"
+          />
+          <input
+            type="text"
+            value={newProduct.image_3}
+            onChange={(e) => setNewProduct({ ...newProduct, image_3: e.target.value })}
+            placeholder="Product Image 3 URL"
+            className="form-input"
+          />
+          <input
+            type="text"
+            value={newProduct.image_4}
+            onChange={(e) => setNewProduct({ ...newProduct, image_4: e.target.value })}
+            placeholder="Product Image 4 URL"
+            className="form-input"
+          />
         </div>
-      )}
+        <button onClick={handleCreateProduct} className="btn btn-primary">
+          Create Product
+        </button>
+      </div>
 
       {/* Product List */}
-      <div>
-        <h3>Product List</h3>
-        <ul>
-          {products && products.length > 0 ? (
-            products.map((prod, index) => (
-              <li key={index}>
-                <h4>{prod.title || 'No title'}</h4>
-                <p>{prod.description || 'No description'}</p>
-                <p>Category: {prod.category || 'No category'}</p>
-                <p>Price: ${prod.price || 'No price'}</p>
-                <img src={prod.image || ''} alt={prod.title || 'No image'} style={{ width: '100px' }} />
-                <button onClick={() => setProductToEdit(prod)}>Edit</button>
-              </li>
-            ))
-          ) : (
-            <p>No products available.</p>
-          )}
-        </ul>
+      <div className="product-list">
+        {products && products.length > 0 ? (
+          products.map((prod) => (
+            <div key={prod.id} className="product-card">
+              <img src={prod.image_1 || ""} alt={prod.title || "Product"} className="product-image" />
+              <h4 className="product-title">{prod.title || "No title"}</h4>
+              <p className="product-description">{prod.description || "No description"}</p>
+              <p className="product-category">Category: {prod.category || "No category"}</p>
+              <p className="product-price">${prod.price || "0.00"}</p>
+              <div className="product-actions">
+                <button onClick={() => setProductToEdit(prod)} className="btn btn-secondary">
+                  Edit
+                </button>
+                <button onClick={() => handleDeleteProduct(prod.id)} className="btn btn-danger">
+                  Delete
+                </button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No products available.</p>
+        )}
       </div>
-    </div>
-  );
-};
 
-export default ProductsPage;
+      {/* Edit Product Modal */}
+      {productToEdit && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3 className="form-title">Edit Product</h3>
+            <div className="form-grid">
+              <input
+                type="text"
+                value={productToEdit.title}
+                onChange={(e) => setProductToEdit({ ...productToEdit, title: e.target.value })}
+                placeholder="Product Title"
+                className="form-input"
+              />
+              <input
+                type="text"
+                value={productToEdit.description}
+                onChange={(e) => setProductToEdit({ ...productToEdit, description: e.target.value })}
+                placeholder="Product Description"
+                className="form-input"
+              />
+              <select
+                value={productToEdit.category}
+                onChange={(e) => setProductToEdit({ ...productToEdit, category: e.target.value })}
+                className="form-select"
+              >
+                <option value="">Select Category</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+              <input
+                type="number"
+                value={productToEdit.price}
+                onChange={(e) => setProductToEdit({ ...productToEdit, price: e.target.value })}
+                placeholder="Product Price"
+                className="form-input"
+                step="0.01"
+              />
+              <input
+                type="text"
+                value={productToEdit.image_1}
+                onChange={(e) => setProductToEdit({ ...productToEdit, image_1: e.target.value })}
+                placeholder="Product Image 1 URL"
+                className="form-input"
+              />
+              <input
+                type="text"
+                value={productToEdit.image_2}
+                onChange={(e) => setProductToEdit({ ...productToEdit, image_2: e.target.value })}
+                placeholder="Product Image 2 URL"
+                className="form-input"
+              />
+              <input
+                type="text"
+                value={productToEdit.image_3}
+                onChange={(e) => setProductToEdit({ ...productToEdit, image_3: e.target.value })}
+                placeholder="Product Image 3 URL"
+                className="form-input"
+              />
+              <input
+                type="text"
+                value={productToEdit.image_4}
+                onChange={(e) => setProductToEdit({ ...productToEdit, image_4: e.target.value })}
+                placeholder="Product Image 4 URL"
+                className="form-input"
+              />
+            </div>
+            <div className="modal-actions">
+              <button onClick={() => setProductToEdit(null)} className="btn btn-secondary">
+                Cancel
+              </button>
+              <button onClick={() => handleUpdateProduct(productToEdit.id, productToEdit)} className="btn btn-primary">
+                Update Product
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default ProductsPage
+

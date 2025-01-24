@@ -61,7 +61,7 @@ const CategoriesPage = () => {
     }
   };
 
-  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY0OTcxMTgxLCJpYXQiOjE3MzM0MzUxODEsImp0aSI6IjQxNDAxZDliNWI0YTQ1ZDE5NWNjOWMzMWZhODhmZDg2IiwidXNlcl9pZCI6Mn0.KiJUAxz6aRtHUqLArEloEC8qYUQKhtB86NebB5DzwGY';
+  const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzY4ODk4NzM0LCJpYXQiOjE3MzczNjI3MzQsImp0aSI6IjA2OWRkZTA0NWIxZjQ5OGViOWRjZmVmMTQ0YWE4ZDcxIiwidXNlcl9pZCI6MX0.ntJ1lqcs0eddyBAhh3H9Ou9Gl6u-9zv-GTsKhQtkUKg';
 
   // Update category function
   const handleUpdateCategory = async (categoryId, categoryData) => {

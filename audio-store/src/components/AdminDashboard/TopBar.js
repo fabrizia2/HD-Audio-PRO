@@ -6,7 +6,6 @@ const TopBar = () => {
     <div className="top-bar">
       <div className="user-info">
         <span>Welcome, Admin</span>
-        <button>Logout</button>
       </div>
     </div>
   );

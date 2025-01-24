@@ -44,7 +44,7 @@ function ProductList() {
             <div key={product.id} className="product-card">
               <img src={product.image} alt={product.name} className="product-image" />
               <h3>{product.title}</h3>
-              <p>${parseFloat(product.price).toFixed(2)}</p>
+              <p>Ksh.{parseFloat(product.price).toFixed(2)}</p>
               <Link to={`/product/${product.id}`}>
                 <button className="view-more-button">Buy Now</button>
               </Link>

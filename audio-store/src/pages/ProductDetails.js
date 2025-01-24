@@ -1,59 +1,58 @@
-// src/pages/ProductDetails.js
-
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
-import '../styles/ProductDetails.css';
-import config from '../config/config';
+import React, { useState, useEffect } from "react"
+import { useParams, Link } from "react-router-dom"
+import { useCart } from "../context/CartContext"
+import "../styles/ProductDetails.css"
+import config from "../config/config"
+import Carousel from "../components/Carousel"
 
 function ProductDetails() {
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const { addToCart } = useCart();
-  const [quantity, setQuantity] = useState(1);
-  const [error, setError] = useState(null);
+  const { id } = useParams()
+  const [product, setProduct] = useState(null)
+  const { addToCart } = useCart()
+  const [quantity, setQuantity] = useState(1)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`${config.API_BASE_URL}/product-detail/${id}`);
-        
+        const response = await fetch(`${config.API_BASE_URL}/product-detail/${id}`)
+
         if (!response.ok) {
-          throw new Error(`Product not found with ID: ${id}`);
+          throw new Error(`Product not found with ID: ${id}`)
         }
 
-        const contentType = response.headers.get("content-type");
+        const contentType = response.headers.get("content-type")
         if (contentType && contentType.includes("application/json")) {
-          const data = await response.json();
-          console.log('Fetched product:', data); // Log product details
-          setProduct(data);
+          const data = await response.json()
+          console.log("Fetched product:", data)
+          setProduct(data)
         } else {
-          const text = await response.text();
-          console.error("Error: Expected JSON but got HTML:", text);
-          throw new Error("Expected JSON but got HTML, possibly an error page.");
+          const text = await response.text()
+          console.error("Error: Expected JSON but got HTML:", text)
+          throw new Error("Expected JSON but got HTML, possibly an error page.")
         }
       } catch (error) {
-        setError(error.message);
-        console.error("Error fetching product:", error);
+        setError(error.message)
+        console.error("Error fetching product:", error)
       }
-    };
+    }
 
-    fetchProduct();
-  }, [id]);
+    fetchProduct()
+  }, [id])
 
   if (error) {
-    return <p>{error}</p>;
+    return <p>{error}</p>
   }
 
   if (!product) {
-    return <p>Loading product...</p>;
+    return <p>Loading product...</p>
   }
 
-  const price = parseFloat(product.price);
-  const totalPrice = price * quantity;
+  const price = Number.parseFloat(product.price)
+  const totalPrice = price * quantity
 
   if (isNaN(price)) {
-    return <p>Invalid product price.</p>;
+    return <p>Invalid product price.</p>
   }
 
   const handleAddToCart = () => {
@@ -61,50 +60,68 @@ function ProductDetails() {
       ...product,
       price,
       quantity,
-    };
-    console.log('Adding to cart:', productToAdd); // Log what is being added to the cart
-    addToCart(productToAdd);
-    alert(`${quantity} ${product.name}(s) have been added to your cart!`);
-  };
+    }
+    console.log("Adding to cart:", productToAdd)
+    addToCart(productToAdd)
+    alert(`${quantity} ${product.title}(s) have been added to your cart!`)
+  }
 
   const handleIncrement = () => {
-    setQuantity(quantity + 1);
-  };
+    setQuantity(quantity + 1)
+  }
 
   const handleDecrement = () => {
     if (quantity > 1) {
-      setQuantity(quantity - 1);
+      setQuantity(quantity - 1)
     }
-  };
+  }
+
+  const productImages = product.image_urls || []
+  console.log("Product Images:", productImages)
 
   return (
     <div className="product-details-container">
-      <div className="product-details-image">
-        <img src={product.image_url} alt={product.name} />
+      {/* Carousel Section */}
+      <div className="product-details-carousel">
+        <Carousel images={productImages} autoSlideInterval={5000} />
       </div>
+
+      {/* Product Information Section */}
       <div className="product-details-info">
-        <h2>{product.title}</h2>
-        <p className="product-details-price">${price.toFixed(2)}</p>
-        <p className="product-details-description">
-          {product.description}
-        </p>
-        <div className="quantity-control">
-          <button onClick={handleDecrement}>-</button>
-          <span>{quantity}</span>
-          <button onClick={handleIncrement}>+</button>
+        <h2 className="text-2xl font-bold mb-2">{product.title}</h2>
+        <p className="product-details-price text-xl font-semibold mb-2">Ksh.{price.toFixed(2)}</p>
+        <p className="product-details-description mb-4">{product.description}</p>
+
+        {/* Quantity Control */}
+        <div className="quantity-control flex items-center mb-4">
+          <button onClick={handleDecrement} className="px-3 py-1 bg-gray-200 rounded-l">
+            -
+          </button>
+          <span className="px-4 py-1 bg-gray-100">{quantity}</span>
+          <button onClick={handleIncrement} className="px-3 py-1 bg-gray-200 rounded-r">
+            +
+          </button>
         </div>
-        <p className="product-details-total-price">
-          Total: ${totalPrice.toFixed(2)}
-        </p>
-        <button className="add-to-cart-button" onClick={handleAddToCart}>
+
+        {/* Total Price */}
+        <p className="product-details-total-price text-lg font-semibold mb-4">Total: Ksh.{totalPrice.toFixed(2)}</p>
+
+        {/* Add to Cart Button */}
+        <button
+          className="add-to-cart-button bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300 mb-4"
+          onClick={handleAddToCart}
+        >
           Add to Cart
         </button>
-        <Link to={-1} className="back-link">
+
+        {/* Go Back Link */}
+        <Link to={-1} className="back-link text-blue-500 hover:underline">
           <h2>Go Back</h2>
         </Link>
       </div>
     </div>
-  );
+  )
 }
 
-export default ProductDetails;
+export default ProductDetails
+

@@ -12,9 +12,6 @@ const Carousel = ({ images, autoSlideInterval = 5000 }) => {
     return () => clearInterval(slideInterval)
   }, [goToNext, autoSlideInterval])
 
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => (prevIndex === 0 ? images.length - 1 : prevIndex - 1))
-  }
 
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex)
@@ -37,18 +34,7 @@ const Carousel = ({ images, autoSlideInterval = 5000 }) => {
       />
       {images.length > 1 && (
         <>
-          <div
-            className="absolute top-1/2 -translate-y-1/2 left-2 text-xl rounded-full p-1 bg-black/20 text-white cursor-pointer"
-            onClick={goToPrevious}
-          >
-            &#10094;
-          </div>
-          <div
-            className="absolute top-1/2 -translate-y-1/2 right-2 text-xl rounded-full p-1 bg-black/20 text-white cursor-pointer"
-            onClick={goToNext}
-          >
-            &#10095;
-          </div>
+          
           <div className="absolute bottom-2 left-0 right-0 flex justify-center">
             {images.map((_, slideIndex) => (
               <div
@@ -58,7 +44,6 @@ const Carousel = ({ images, autoSlideInterval = 5000 }) => {
                   currentIndex === slideIndex ? "text-blue-500" : "text-gray-400"
                 }`}
               >
-                ●
               </div>
             ))}
           </div>

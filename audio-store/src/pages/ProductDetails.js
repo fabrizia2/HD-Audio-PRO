@@ -90,8 +90,11 @@ function ProductDetails() {
       <div className="product-details-info">
         <h2 className="text-2xl font-bold mb-2">{product.title}</h2>
         <p className="product-details-price text-xl font-semibold mb-2">Ksh.{price.toFixed(2)}</p>
+        <h3>PRODUCT DESCRIPTION</h3>
         <p className="product-details-description mb-4">{product.description}</p>
 
+        <h3>PRODUCT INDEX</h3>
+        <p className="product-details-description mb-4">{product.index}</p>
         {/* Quantity Control */}
         <div className="quantity-control flex items-center mb-4">
           <button onClick={handleDecrement} className="px-3 py-1 bg-gray-200 rounded-l">

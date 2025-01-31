@@ -10,6 +10,7 @@ const ProductsPage = () => {
   const [newProduct, setNewProduct] = useState({
     title: "",
     description: "",
+    index: "",
     category: "",
     price: "",
     image_1: "",
@@ -77,6 +78,7 @@ const ProductsPage = () => {
       setNewProduct({
         title: "",
         description: "",
+        index: "",
         category: "",
         price: "",
         image_1: "",
@@ -168,6 +170,13 @@ const ProductsPage = () => {
             placeholder="Product Description"
             className="form-input"
           />
+          <input
+            type="text"
+            value={newProduct.index}
+            onChange={(e) => setNewProduct({ ...newProduct, index: e.target.value })}
+            placeholder="Product Index"
+            className="form-input"
+          />
           <select
             value={newProduct.category}
             onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
@@ -230,6 +239,7 @@ const ProductsPage = () => {
               <img src={prod.image_1 || ""} alt={prod.title || "Product"} className="product-image" />
               <h4 className="product-title">{prod.title || "No title"}</h4>
               <p className="product-description">{prod.description || "No description"}</p>
+              <p className="product-index">{prod.index || "No index"}</p>
               <p className="product-category">Category: {prod.category || "No category"}</p>
               <p className="product-price">${prod.price || "0.00"}</p>
               <div className="product-actions">
@@ -265,6 +275,13 @@ const ProductsPage = () => {
                 value={productToEdit.description}
                 onChange={(e) => setProductToEdit({ ...productToEdit, description: e.target.value })}
                 placeholder="Product Description"
+                className="form-input"
+              />
+              <input
+                type="text"
+                value={productToEdit.index}
+                onChange={(e) => setProductToEdit({ ...productToEdit, index: e.target.value })}
+                placeholder="Product Index"
                 className="form-input"
               />
               <select

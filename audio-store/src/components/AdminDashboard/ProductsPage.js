@@ -126,7 +126,7 @@ const ProductsPage = () => {
 
   const handleDeleteProduct = async (productId) => {
     try {
-      const response = await fetch(`${config.API_BASE_URL}/delete-product/${productId}/`, {
+      const response = await fetch(`${config.API_BASE_URL}/products/delete/${productId}/`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

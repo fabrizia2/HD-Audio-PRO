@@ -79,9 +79,9 @@ const Home = () => {
       <h2>Our Products</h2>
       <div className="categories">
         <div className="category">
-          <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734430168/micro2_tqfstc.jpg" alt="Speakers" />
-          <h2>Microphone cases</h2>
-          <p>High-quality cases for your audio needs.</p>
+          <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1738342851/Passive_single_18_inch_Sub_urlxvi.jpg" alt="Speakers" />
+          <h2>Speakers</h2>
+          <p>High-quality speakers for your audio needs.</p>
         </div>
         <div className="category">
           <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734430590/amp3_nsyrhn.png" alt="Amplifiers" />

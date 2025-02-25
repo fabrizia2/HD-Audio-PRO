@@ -8,7 +8,7 @@ const categories = [
       image: 'https://res.cloudinary.com/dubzg5mqz/image/upload/v1737828023/Amplifier_1_ktzklr.jpg',
     },
     {
-        name: 'Mixer',
+        name: 'Mixers',
         image: 'https://res.cloudinary.com/dubzg5mqz/image/upload/v1738007361/mixer_4_lrokqb.jpg',
     },
     {

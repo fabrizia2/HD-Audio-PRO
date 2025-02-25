@@ -38,10 +38,11 @@ function ProductDetails() {
 
         {/* Product Information Section */}
         <div className="product-details-info">
-          <h2 className="text-2xl font-bold mb-2">{product.title}</h2>
+          <h2 className="title">{product.title}</h2>
           <p className="product-details-price text-xl font-semibold mb-2">
-            Ksh. {price.toFixed(2)}
+            Ksh. {price.toLocaleString()}
           </p>
+
 
           <h3>PRODUCT DESCRIPTION</h3>
           <p className="product-details-description mb-4">{product.description}</p>

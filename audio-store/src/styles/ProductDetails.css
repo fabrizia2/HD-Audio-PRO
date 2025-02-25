@@ -163,6 +163,12 @@
 }
 
 @media (max-width: 425px) {
+  h2, h3 {
+    font-size: 15px;
+  }
+  p {
+    font-size: 13px;
+  }
   .product-details-container {
     flex-direction: column;
     align-items: center;

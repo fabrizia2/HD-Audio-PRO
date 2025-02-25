@@ -32,7 +32,7 @@ const ProductsPage = () => {
             />
 
             <h3>{product.title}</h3>
-            <p>Price: Ksh.{product.price}</p>
+            <p>Price: Ksh. {product.price.toLocaleString()}</p>
             <Link to={`/product/${product.id}`} style={{ textDecoration: 'none', color: 'white' }}>
               <button style={{ background: 'black', color: 'white', padding: '10px', border: 'none', cursor: 'pointer' }}>
                 View More Details

@@ -13,6 +13,10 @@ const ProductList = () => {
     loadProducts();
   }, []);
 
+  console.log("ProductList data:", ProductList);
+console.log("Type of ProductList:", typeof ProductList);
+console.log("Is ProductList an Array?", Array.isArray(ProductList));
+
   return (
     <div>
       <h2>Product List</h2>

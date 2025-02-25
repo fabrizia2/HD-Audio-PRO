@@ -12,26 +12,33 @@ function Contact() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+    
         const templateParams = {
             from_name: name,
-            from_email: email,
+            from_email: email, // User's email (from the form)
             message: message,
+            to_email: "info@harmonysounds.co.ke", // Ensure this matches EmailJS template
         };
-
-        emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams, 'YOUR_USER_ID')
-            .then((response) => {
-                console.log('SUCCESS!', response.status, response.text);
-                alert('Message sent! Thank you for contacting us.');
-                setName('');
-                setEmail('');
-                setMessage('');
-            })
-            .catch((error) => {
-                console.log('FAILED...', error);
-                alert('Failed to send message. Please try again later.');
-            });
+    
+        emailjs.send(
+            "service_2tx5dkk",  // Replace with your actual service ID
+            "template_kkeuhp3", // Replace with your actual template ID
+            templateParams,
+            "8xx6KtJD_mwwxtc-4"      // Replace with your actual user ID (public key)
+        )
+        .then((response) => {
+            console.log("SUCCESS!", response.status, response.text);
+            alert("Message sent successfully!");
+            setName('');
+            setEmail('');
+            setMessage('');
+        })
+        .catch((error) => {
+            console.log("FAILED...", error);
+            alert("Failed to send message.");
+        });
     };
+    
 
     return (
         <div className="contact-container">

@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import { useCart } from '../context/CartContext';
 import './Header.css';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false); // State to manage hamburger menu
   const [isTransparent, setIsTransparent] = useState(false);
-  const { cartItems } = useCart(); // Get cart items from CartContext
 
   const toggleMenu = () => {
     setIsOpen(!isOpen); // Toggle the menu open/close state
@@ -55,13 +51,7 @@ const Header = () => {
       <nav>
         <ul className={isOpen ? 'active' : ''}>
           <li><Link to="/" onClick={closeMenu}>Home</Link></li>
-          <li><Link to="/products" onClick={closeMenu}>Products</Link></li>
-          <li>
-            <Link to="/cart" className="cart-link" onClick={closeMenu}>
-              <FontAwesomeIcon icon={faShoppingCart} />
-              {cartItems.length > 0 && <span className="cart-count">{cartItems.length}</span>} Cart
-            </Link>
-          </li>
+          <li><Link to="/categories" onClick={closeMenu}>Products</Link></li>
           <li><Link to="/about" onClick={closeMenu}>About</Link></li>
           <li><Link to="/contact" onClick={closeMenu}>Contact</Link></li>
         </ul>

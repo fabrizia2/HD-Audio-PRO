@@ -25,28 +25,44 @@ const Cart = () => {
   const handleCheckout = async (e) => {
     e.preventDefault();
     setIsProcessing(true);
+  
     try {
       const totalAmount = calculateTotalPrice(); // Calculate the total price
+  
+      // Format the phone number (e.g., convert "0781394059" to "254781394059")
+      const formattedPhoneNumber = `254${formData.phoneNumber.slice(1)}`;
+  
+      // Prepare the payload
+      const payload = {
+        amount: parseFloat(totalAmount), // Ensure amount is a number
+        payer_phone: formattedPhoneNumber, // Use formatted phone number
+        payer_email: formData.email, // Use email from form data
+        tx_ref: `cart-payment-${Date.now()}`, // Add a unique transaction reference
+        redirect_url: `${window.location.origin}/payment-success`, // Add redirect URL
+      };
+  
+      console.log('Sending payload to backend:', payload); // Debugging
+  
+      // Send payment details to the backend
       const response = await fetch(`${config.API_BASE_URL}/mpesa-payment/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          amount: totalAmount,
-          customer: {
-            email: formData.email,
-            phone_number: formData.phoneNumber,
-          },
-        }),
+        body: JSON.stringify(payload),
       });
   
+      console.log('Backend response:', response); // Debugging
+  
       if (!response.ok) {
+        // Log the response body for more details
+        const errorResponse = await response.json();
+        console.error('Backend error response:', errorResponse);
         throw new Error('Payment failed');
       }
   
       const result = await response.json();
-      console.log('Payment API result:', result); // Log the entire response for debugging
+      console.log('Payment API result:', result); // Debugging
   
       // Check if the payment_link is available in the response
       if (result.payment_link) {
@@ -62,7 +78,6 @@ const Cart = () => {
       setIsProcessing(false);
     }
   };
-  
   
 
   const calculateTotalPrice = () => {
@@ -84,8 +99,8 @@ const Cart = () => {
                   <div>
                     <h3>{item.title}</h3>
                     <p>Quantity: {item.quantity}</p>
-                    <p>Price: ${item.price.toFixed(2)}</p>
-                    <p>Total: ${(item.price * item.quantity).toFixed(2)}</p>
+                    <p>Price: Ksh.{item.price.toFixed(2)}</p>
+                    <p>Total: Ksh.{(item.price * item.quantity).toFixed(2)}</p>
                   </div>
                 </div>
                 <button
@@ -99,7 +114,7 @@ const Cart = () => {
           )}
         </ul>
         <div className="cart-summary">
-          <p>Total Price: ${calculateTotalPrice()}</p>
+          <p>Total Price: Ksh.{calculateTotalPrice()}</p>
         </div>
       </div>
       <div className="order-form">

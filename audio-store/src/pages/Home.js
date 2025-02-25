@@ -65,11 +65,18 @@ const Home = () => {
             <div className="logoi">
               <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735885098/jw-icon-unplated_kda8xs.png" alt="Microphones" /> </a>
             </div>
+            <div className="logoi">
+              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1740487042/djdash-removebg-preview_fcogs2.png" alt="Microphones" /> </a>
+            </div>
+            <div className="logoi">
+              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1740487042/xposo_tcthco.png" alt="Microphones" /> </a>
+            </div>
 
         </div>
       </section>
 
       {/* Categories Section */}
+      <h2>Our Products</h2>
       <div className="categories">
         <div className="category">
           <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1734430168/micro2_tqfstc.jpg" alt="Speakers" />
@@ -88,7 +95,7 @@ const Home = () => {
         </div>
         {/* View More Button */}
         <div className="view-more">
-          <Link to="/products">
+          <Link to="/categories">
             <button className="view-more-button">View More</button>
           </Link>
         </div>

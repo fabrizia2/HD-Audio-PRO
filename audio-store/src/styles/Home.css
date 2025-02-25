@@ -218,7 +218,7 @@
 .logoi {
   text-align: center; /* Center align image and button */
   margin-bottom: 20px; /* Add space between each item */
-  flex: 0 0 calc(15% - 20px); /* Set width for each item (4 items per row) */
+  flex: 0 0 calc(10% - 10px); /* Set width for each item (4 items per row) */
 }
 
 .logoi img {

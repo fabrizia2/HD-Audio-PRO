@@ -1,9 +1,14 @@
 /* Ensure your entire app takes full height of the viewport */
+* {
+  font-family: "MS Reference Sans Serif", sans-serif;
+}
+
 html, body {
   height: 100%;
   margin: 0;
   overflow-y: scroll;
   overflow-x: hidden;
+  font-style: referrence;
 }
 
 #root {

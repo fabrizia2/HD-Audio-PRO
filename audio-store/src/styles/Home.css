@@ -101,10 +101,13 @@
 }
 
 .category img {
-  height: 200px;
-  width: 100%;
+  width: 100%;  /* Allow the image to scale with its container */
+  height: auto;  /* Maintain the aspect ratio */
+  max-height: 200px; /* Prevent images from getting too tall */
+  object-fit: contain; /* Ensures the image scales inside without distortion */
   border-radius: 8px;
 }
+
 
 .category h2 {
   font-size: 1.5rem;
@@ -138,77 +141,10 @@
   border: #050505 solid 2px;
 }
 
-.testimonials {
-  padding: 60px 0;
-  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-  text-align: center;
-  position: relative;
-}
-
-.testimonials h2 {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: #333;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.testimonials-carousel {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.testimonial-card {
-  background-color: #fff;
-  border-radius: 15px;
-  align-self: center;
-  padding: 20px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  max-width: 400px;
-  margin: 0 15px;
-}
-
-.testimonial-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-}
-
-.testimonial-card p {
-  font-size: 1.2rem;
-  color: #555;
-  line-height: 1.5;
-}
-
-.testimonial-card p:first-child {
-  font-style: italic;
-}
-
-.testimonial-card p:last-child {
-  font-weight: bold;
-  color: #333;
-  margin-top: 15px;
-}
-
-.carousel .slide {
-  display: flex;
-  justify-content: center;
-}
-
-.carousel .control-arrow {
-  display: none; /* Hide carousel navigation arrows */
-}
-
-.carousel .thumb {
-  display: none; /* Hide the thumbs */
-}
 
 .logos {
   display: flex;
-  overflow: hidden; /* Hide overflowing logos */
+  overflow: hidden;
   white-space: nowrap;
   background-color: white;
   border: #050505 solid 2px;
@@ -218,19 +154,22 @@
 
 .logos .logos-slide {
   display: flex;
+  align-items: center;
   animation: scroll 15s linear infinite; /* Adjust speed as needed */
 }
 
 .logoi {
   flex: 0 0 auto;
-  margin: 0 20px; /* Space between logos */
+  margin: 0 40px; /* Increased spacing to balance sizes */
 }
 
 .logoi img {
-  width: 100px; /* Adjust as needed */
-  height: auto;
+  width: 150px; /* Increased size for better visibility */
+  height: 100px; /* Ensure uniform height */
+  object-fit: contain; /* Keep the aspect ratio while fitting in */
   display: block;
 }
+
 
 @keyframes scroll {
   from {

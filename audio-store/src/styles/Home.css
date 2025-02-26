@@ -208,25 +208,39 @@
 
 .logos {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  overflow: hidden; /* Hide overflowing logos */
+  white-space: nowrap;
   background-color: white;
   border: #050505 solid 2px;
-  padding-top: 20px;
+  padding: 20px 0;
+  position: relative;
+}
+
+.logos .logos-slide {
+  display: flex;
+  animation: scroll 15s linear infinite; /* Adjust speed as needed */
 }
 
 .logoi {
-  text-align: center; /* Center align image and button */
-  margin-bottom: 20px; /* Add space between each item */
-  flex: 0 0 calc(10% - 10px); /* Set width for each item (4 items per row) */
+  flex: 0 0 auto;
+  margin: 0 20px; /* Space between logos */
 }
 
 .logoi img {
-  width: 100%; /* Ensure image fills its container */
-  max-width: 100px; /* Limit image width */
-  justify-content: space-around;
-  margin-bottom: 15px;
+  width: 100px; /* Adjust as needed */
+  height: auto;
+  display: block;
 }
+
+@keyframes scroll {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-60%);
+  }
+}
+
 
 /* Mobile View */
 @media only screen and (max-width: 768px) {

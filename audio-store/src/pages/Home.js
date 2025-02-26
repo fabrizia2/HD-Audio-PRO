@@ -40,40 +40,75 @@ const Home = () => {
       </div>
 
       <section>
-        <h2>Our Clients</h2> 
+        <h2>Our Clients</h2>
         <div className="logos">
+          <div className="logos-slide">
             <div className="logoi">
-              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884358/jaz_hjlsxk.jpg" alt="Microphones" /> </a>
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884358/jaz_hjlsxk.jpg" alt="Microphones" />
+              </a>
+            </div>
+            <div className="logoi">
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884492/572cOi2Uu1jIdAAiRobSdRb2bFepjD0DZGx1ikVpxWNl4kc63uf8O-KfNLp5SBWxYBP5apgVxHw_s900-c-k-c0x00ffffff-no-rj_fjx5jc.jpg" alt="Microphones" />
+              </a>
+            </div>
+            <div className="logoi">
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884681/Skyward_20Express_20Logo300x150-01_z2zptq.png" alt="Microphones" />
+              </a>
+            </div>
+            <div className="logoi">
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884844/1630518832688_rkgzsl.jpg" alt="Microphones" />
+              </a>
+            </div>
+            <div className="logoi">
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884961/Britam-Holdings-fb_mrt8v1.png" alt="Microphones" />
+              </a>
+            </div>
+            <div className="logoi">
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735885098/jw-icon-unplated_kda8xs.png" alt="Microphones" />
+              </a>
+            </div>
+            <div className="logoi">
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1740487042/djdash-removebg-preview_fcogs2.png" alt="Microphones" />
+              </a>
+            </div>
+            <div className="logoi">
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1740487042/xposo_tcthco.png" alt="Microphones" />
+              </a>
             </div>
 
+            {/* Duplicate logos for smooth looping effect */}
             <div className="logoi">
-              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884492/572cOi2Uu1jIdAAiRobSdRb2bFepjD0DZGx1ikVpxWNl4kc63uf8O-KfNLp5SBWxYBP5apgVxHw_s900-c-k-c0x00ffffff-no-rj_fjx5jc.jpg" alt="Microphones" /> </a>
-            </div>
-
-            <div className="logoi">
-              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884681/Skyward_20Express_20Logo300x150-01_z2zptq.png" alt="Microphones" /> </a>
-            </div>
-
-            <div className="logoi">
-              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884844/1630518832688_rkgzsl.jpg" alt="Microphones" /> </a>
-            </div>
-
-            <div className="logoi">
-              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884961/Britam-Holdings-fb_mrt8v1.png" alt="Microphones" /> </a>
-            </div>
-
-            <div className="logoi">
-              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735885098/jw-icon-unplated_kda8xs.png" alt="Microphones" /> </a>
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884358/jaz_hjlsxk.jpg" alt="Microphones" />
+              </a>
             </div>
             <div className="logoi">
-              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1740487042/djdash-removebg-preview_fcogs2.png" alt="Microphones" /> </a>
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884492/572cOi2Uu1jIdAAiRobSdRb2bFepjD0DZGx1ikVpxWNl4kc63uf8O-KfNLp5SBWxYBP5apgVxHw_s900-c-k-c0x00ffffff-no-rj_fjx5jc.jpg" alt="Microphones" />
+              </a>
             </div>
             <div className="logoi">
-              <a href="/"> <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1740487042/xposo_tcthco.png" alt="Microphones" /> </a>
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884681/Skyward_20Express_20Logo300x150-01_z2zptq.png" alt="Microphones" />
+              </a>
             </div>
-
+            <div className="logoi">
+              <a href="/">
+                <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1735884844/1630518832688_rkgzsl.jpg" alt="Microphones" />
+              </a>
+            </div>
+          </div>
         </div>
       </section>
+
 
       {/* Categories Section */}
       <h2>Our Products</h2>

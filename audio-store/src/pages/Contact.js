@@ -21,10 +21,10 @@ function Contact() {
         };
     
         emailjs.send(
-            "service_2tx5dkk",  // Replace with your actual service ID
-            "template_kkeuhp3", // Replace with your actual template ID
+            "service_alweugw",  // Replace with your actual service ID
+            "template_jwrntwo", // Replace with your actual template ID
             templateParams,
-            "8xx6KtJD_mwwxtc-4"      // Replace with your actual user ID (public key)
+            "hu1WMBtcu5rkuNfUo"      // Replace with your actual user ID (public key)
         )
         .then((response) => {
             console.log("SUCCESS!", response.status, response.text);

@@ -16,7 +16,7 @@ const categories = [
         image: 'https://res.cloudinary.com/dubzg5mqz/image/upload/v1737759708/racks_1_plne11.jpg',
     },
     {
-      name: 'Power distrubutor',
+      name: 'Power Distributor',
       image: 'https://res.cloudinary.com/dubzg5mqz/image/upload/v1738343723/3_Phase_6_channel_Power_distrubutor_3_ob19uf.jpg',
     },
     {

@@ -141,8 +141,9 @@
   color: #333;
 }
 
-.add-to-cart-button {
+.button, .add-to-cart-button {
   background-color: #080808;
+  margin: 10px;
   color: #fff;
   padding: 12px;
   font-size: 1.2rem;

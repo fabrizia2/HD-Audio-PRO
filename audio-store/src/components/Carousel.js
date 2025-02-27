@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
 
-const Carousel = ({ images, autoSlideInterval = 5000 }) => {
+const Carousel = ({ images }) => {
   // Ensure images is an array, even if provided as a comma-separated string
   const formattedImages = Array.isArray(images)
     ? images.length === 1 && typeof images[0] === "string"
@@ -10,18 +10,17 @@ const Carousel = ({ images, autoSlideInterval = 5000 }) => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const goToNext = useCallback(() => {
+  const goToNext = () => {
     setCurrentIndex((prevIndex) =>
       prevIndex === formattedImages.length - 1 ? 0 : prevIndex + 1
     );
-  }, [formattedImages.length]);
+  };
 
-  useEffect(() => {
-    if (formattedImages.length > 1) {
-      const slideInterval = setInterval(goToNext, autoSlideInterval);
-      return () => clearInterval(slideInterval);
-    }
-  }, [goToNext, autoSlideInterval, formattedImages.length]);
+  const goToPrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? formattedImages.length - 1 : prevIndex - 1
+    );
+  };
 
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
@@ -37,14 +36,31 @@ const Carousel = ({ images, autoSlideInterval = 5000 }) => {
 
   return (
     <div className="relative h-full w-full">
+      {/* Image Display */}
       <img
         src={formattedImages[currentIndex] || "/placeholder.svg"}
         alt={`Product ${currentIndex + 1}`}
         className="w-full h-full object-cover"
       />
-      
+
       {formattedImages.length > 1 && (
         <>
+          {/* Previous Button */}
+          <button
+            onClick={goToPrev}
+            className="button absolute left-6 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full mr-6"
+          >
+            ❮
+          </button>
+
+          {/* Next Button */}
+          <button
+            onClick={goToNext}
+            className="button absolute right-6 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 text-white p-2 rounded-full"
+          >
+            ❯
+          </button>
+
           {/* Dots for navigation */}
           <div className="absolute bottom-2 left-0 right-0 flex justify-center">
             {formattedImages.map((_, slideIndex) => (

@@ -38,3 +38,6 @@ footer {
   text-align: center; /* Center the text in the footer */
 }
 
+.button {
+  margin-left: 10px;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Carousel.css"; // Import the CSS file
 
 const Carousel = ({ images }) => {
   // Ensure images is an array, even if provided as a comma-separated string
@@ -28,48 +29,40 @@ const Carousel = ({ images }) => {
 
   if (!formattedImages || formattedImages.length === 0) {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-gray-200">
+      <div className="carousel-container">
         <p>No image available</p>
       </div>
     );
   }
 
   return (
-    <div className="relative h-full w-full">
+    <div className="carousel-container">
       {/* Image Display */}
       <img
         src={formattedImages[currentIndex] || "/placeholder.svg"}
         alt={`Product ${currentIndex + 1}`}
-        className="w-full h-full object-cover"
+        className="carousel-image"
       />
 
       {formattedImages.length > 1 && (
         <>
           {/* Previous Button */}
-          <button
-            onClick={goToPrev}
-            className="button absolute left-6 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full mr-6"
-          >
+          <button onClick={goToPrev} className="carousel-button carousel-button-left">
             ❮
           </button>
 
           {/* Next Button */}
-          <button
-            onClick={goToNext}
-            className="button absolute right-6 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 text-white p-2 rounded-full"
-          >
+          <button onClick={goToNext} className="carousel-button carousel-button-right">
             ❯
           </button>
 
           {/* Dots for navigation */}
-          <div className="absolute bottom-2 left-0 right-0 flex justify-center">
+          <div className="carousel-dots">
             {formattedImages.map((_, slideIndex) => (
               <div
                 key={slideIndex}
                 onClick={() => goToSlide(slideIndex)}
-                className={`w-3 h-3 mx-1 rounded-full cursor-pointer ${
-                  currentIndex === slideIndex ? "bg-blue-500" : "bg-gray-400"
-                }`}
+                className={`carousel-dot ${currentIndex === slideIndex ? "active" : ""}`}
               />
             ))}
           </div>

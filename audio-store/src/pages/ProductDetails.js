@@ -41,7 +41,12 @@ function ProductDetails() {
           <h2 className="title">{product.title}</h2>
           <p className="product-details-price text-xl font-semibold mb-2">
             Ksh. {price.toLocaleString()}
-            {product.was}
+            {/* Add a non-breaking space (or regular space) */}
+            &nbsp;
+            {/* Wrap 'was' price and apply strikethrough style */}
+            <span className="line-through text-lg font-normal text-gray-500">
+              Ksh. {product.was.toLocaleString()}
+            </span>
           </p>
 
 

@@ -40,13 +40,16 @@ function ProductDetails() {
         <div className="product-details-info">
           <h2 className="title">{product.title}</h2>
           <p className="product-details-price text-xl font-semibold mb-2">
-            Ksh. {price.toLocaleString()}
-            {/* Add a non-breaking space (or regular space) */}
-            &nbsp;
-            {/* Wrap 'was' price and apply strikethrough style */}
-            <span className="line-through text-lg font-normal text-gray-500">
-              Ksh. {product.was.toLocaleString()}
+            <span className="current-price">
+              Ksh. {price.toLocaleString()}
             </span>
+          
+            {/* Only show 'was' price if it exists and is different from the current price */}
+            {product.was && product.was > price && (
+              <span className="was-price ml-2 line-through text-lg font-normal text-gray-500">
+                Ksh. {product.was.toLocaleString()}
+              </span>
+            )}
           </p>
 
 

@@ -23,6 +23,10 @@ const categories = [
         name: 'Speakers',
         image: 'https://res.cloudinary.com/dubzg5mqz/image/upload/v1738342851/Passive_single_18_inch_Sub_urlxvi.jpg',
     },
+    {
+        name: 'Flight Cases',
+        image: 'https://res.cloudinary.com/dubzg5mqz/image/upload/v1763471065/fl5_t488e6.jpg',
+    },
   ];
   
   export default categories;

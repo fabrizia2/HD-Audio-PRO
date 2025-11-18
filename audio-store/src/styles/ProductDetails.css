@@ -31,6 +31,11 @@
   color: #4a5568;
 }
 
+.was-price {
+  margin-left: 2px;
+  color: grey;
+}
+
 .product-details-description {
   line-height: 1.6;
 }

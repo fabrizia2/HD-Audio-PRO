@@ -41,6 +41,7 @@ function ProductDetails() {
           <h2 className="title">{product.title}</h2>
           <p className="product-details-price text-xl font-semibold mb-2">
             Ksh. {price.toLocaleString()}
+            {product.was}
           </p>
 
 

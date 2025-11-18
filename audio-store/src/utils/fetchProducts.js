@@ -32,7 +32,8 @@ export const fetchProducts = async () => {
         index: row.c[3]?.v || "",  // Storing index in case needed later
         category: row.c[4]?.v ? row.c[4].v.toString().trim() : "Uncategorized",
         price: row.c[5]?.v ? parseFloat(row.c[5].v) : 0,  // Ensure numeric price
-        images: row.c[6]?.v ? [row.c[6].v] : [], // Store images as an array
+        was: row.c[6]?.v || "No price change",
+        images: row.c[7]?.v ? [row.c[7].v] : [], // Store images as an array
       };
     });
 

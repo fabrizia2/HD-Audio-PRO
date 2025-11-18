@@ -46,7 +46,7 @@ function ProductDetails() {
           
             {/* Only show 'was' price if it exists and is different from the current price */}
             {product.was && product.was > price && (
-              <span className="was-price ml-2 line-through text-lg font-normal text-gray-500">
+              <span style={{ textDecoration: 'line-through' }} className="was-price ml-2 line-through text-lg font-normal text-gray-500">
                 Ksh. {product.was.toLocaleString()}
               </span>
             )}

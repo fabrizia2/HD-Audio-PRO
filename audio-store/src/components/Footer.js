@@ -13,7 +13,7 @@ const Footer = () => {
         <div className='slogan'>
           <Link to="/" className="logo">
             <img src="https://res.cloudinary.com/dubzg5mqz/image/upload/v1736023164/hddd-removebg-preview_sbuwez.png" alt="HD Audio Pro" />
-            <h2>“THE FUTURE SOUND”</h2>
+            <h2>HD AUDIO — Designed for Sound Engineers</h2>
           </Link>
         </div>
         <ul className="footer-nav">

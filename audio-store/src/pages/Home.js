@@ -21,7 +21,7 @@ const Home = () => {
           ></iframe>
         </div>
         <div className="hero-content">
-          <h1>“THE FUTURE SOUND”</h1>
+          <h1>HD AUDIO — Designed for Sound Engineers</h1>
           <Link to="/about">
             <button className="shop-now">ABOUT HD AUDIO</button>
           </Link>
@@ -31,9 +31,8 @@ const Home = () => {
 
       <div className="about-container">
         <p>
-          HD AUDIO is a New Range of Acoustically Designed Professional Audio Gear made with Sound Engineers in Mind ,especially for the ever evolving Sound technology requirements.
-
-          We are the industry leaders in the design, and distribution of premium sound reinforcement technologies & Audio Visual accesories 
+          HD AUDIO brings you a new range of professional gear designed for sound engineers who want top performance. Built for today’s fast-changing technology world, 
+              we lead the industry in creating and supplying high-quality sound reinforcement solutions and dependable AV accessories that power every event. 
           <br></br><br></br>
           MICROPHONES •AMPLIFIERS • SPEAKERS • MIXERS •AUDIO VISUAL ACCESORIES
         </p>
